@@ -15,11 +15,11 @@ Antes de executar, a equipe deve localizar:
 
 Anotem aqui os comandos confirmados para a versão final do projeto:
 
-| Componente | Comando de inicialização/teste confirmado |
-|---|---|
+| Componente             | Comando de inicialização/teste confirmado                       |
+| ---------------------- | --------------------------------------------------------------- |
 | Servidor SOAP (Python) | A preencher após conferir o ponto de entrada e as dependências. |
-| Cliente SOAP (Java) | A preencher conforme o build e o ponto de entrada do cliente. |
-| Testes SoapUI | Abrir/importar o WSDL e executar as requisições salvas. |
+| Cliente SOAP (Java)    | A preencher conforme o build e o ponto de entrada do cliente.   |
+| Testes SoapUI          | Abrir/importar o WSDL e executar as requisições salvas.         |
 
 Não inventem nomes de arquivos, portas ou URLs: usem os valores definidos nas configurações e no código.
 

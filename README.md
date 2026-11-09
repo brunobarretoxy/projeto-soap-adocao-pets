@@ -13,12 +13,12 @@ Este repositório documenta e organiza o projeto SOAP de adoção de pets.
 
 ## Componentes e responsabilidades
 
-| Integrante | Responsabilidades principais |
-|---|---|
-| **Patrícia** | Lidera o servidor SOAP em Python e as operações do serviço. |
-| **Erick** | Lidera o cliente SOAP em Java, os testes no SoapUI e a documentação/WSDL. |
-| **Bruno** | Faz uma contribuição pequena de código: adicionar um teste automatizado para uma operação SOAP existente, com orientação da equipe. Também participa da revisão e da apresentação. |
-| **Todos** | Revisar este projeto, testar o fluxo SOAP completo e preparar/apresentar o trabalho em conjunto. |
+| Integrante   | Responsabilidades principais                                                                                                                                                       |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Patrícia** | Lidera o servidor SOAP em Python e as operações do serviço.                                                                                                                        |
+| **Erick**    | Lidera o cliente SOAP em Java, os testes no SoapUI e a documentação/WSDL.                                                                                                          |
+| **Bruno**    | Faz uma contribuição pequena de código: adicionar um teste automatizado para uma operação SOAP existente, com orientação da equipe. Também participa da revisão e da apresentação. |
+| **Todos**    | Revisar este projeto, testar o fluxo SOAP completo e preparar/apresentar o trabalho em conjunto.                                                                                   |
 
 A divisão organiza o trabalho sem exigir que todos implementem o serviço inteiro. Patrícia e Erick lideram a implementação SOAP; Bruno contribui com um teste delimitado e todos se preparam para explicar o fluxo geral.
 
@@ -28,6 +28,7 @@ A divisão organiza o trabalho sem exigir que todos implementem o serviço intei
 - **WSDL:** documento XML que descreve o serviço SOAP, suas operações, mensagens e endereço de acesso.
 - **Cliente SOAP em Java:** aplicação que consulta o contrato e envia requisições ao serviço.
 - **SoapUI:** ferramenta para montar e executar requisições de teste, normalmente a partir do WSDL.
+
 ## Fluxo SOAP
 
 1. O cliente Java ou o SoapUI consulta o WSDL.

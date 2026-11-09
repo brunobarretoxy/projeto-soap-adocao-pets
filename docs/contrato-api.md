@@ -6,16 +6,16 @@ Este documento registra o contrato que os clientes devem seguir para consumir o 
 
 ## 1. Identificação do serviço
 
-| Item | Valor confirmado |
-|---|---|
-| Nome do serviço | A definir |
-| Finalidade | Disponibilizar operações relacionadas à adoção de pets. Detalhar conforme o escopo implementado. |
-| URL do WSDL | A definir |
-| Endereço do serviço (endpoint) | A definir |
-| Versão SOAP | A definir conforme o WSDL (SOAP 1.1 ou SOAP 1.2) |
-| Namespace XML | A definir conforme o WSDL |
-| Transporte | A definir conforme o binding do WSDL; em geral, HTTP ou HTTPS |
-| Autenticação | A definir. Não presumir que há autenticação se ela não estiver implementada. |
+| Item                           | Valor confirmado                                                                                 |
+| ------------------------------ | ------------------------------------------------------------------------------------------------ |
+| Nome do serviço                | A definir                                                                                        |
+| Finalidade                     | Disponibilizar operações relacionadas à adoção de pets. Detalhar conforme o escopo implementado. |
+| URL do WSDL                    | A definir                                                                                        |
+| Endereço do serviço (endpoint) | A definir                                                                                        |
+| Versão SOAP                    | A definir conforme o WSDL (SOAP 1.1 ou SOAP 1.2)                                                 |
+| Namespace XML                  | A definir conforme o WSDL                                                                        |
+| Transporte                     | A definir conforme o binding do WSDL; em geral, HTTP ou HTTPS                                    |
+| Autenticação                   | A definir. Não presumir que há autenticação se ela não estiver implementada.                     |
 
 ## 2. Como interpretar o contrato
 
@@ -32,8 +32,8 @@ SOAP não é uma API REST: não se deve deduzir que há endpoints REST como `/pe
 Preencher uma linha para cada operação existente no WSDL e implementada no servidor. Os nomes abaixo são campos da tabela, não operações sugeridas.
 
 | Operação (nome exato no WSDL) | Finalidade | Entradas e tipos | Resposta e tipos | Pode gerar SOAP Fault? |
-|---|---|---|---|---|
-| A definir | A definir | A definir | A definir | A definir |
+| ----------------------------- | ---------- | ---------------- | ---------------- | ---------------------- |
+| A definir                     | A definir  | A definir        | A definir        | A definir              |
 
 Para cada operação, documentar também:
 
@@ -70,12 +70,12 @@ Não envie os textos `NAMESPACE_SOAP`, `NAMESPACE_DO_SERVICO` ou `OPERACAO_DO_WS
 
 A resposta bem-sucedida também é uma mensagem SOAP XML. Para cada operação, registrar um exemplo real ou anonimizado depois de testar no SoapUI ou no cliente Java.
 
-| Situação | Como identificar | Comportamento confirmado pelo serviço |
-|---|---|---|
-| Sucesso | Resposta SOAP correspondente à operação | A definir por operação |
-| Dados inválidos ou incompletos | SOAP Fault ou resposta definida pelo serviço | A definir após teste |
-| Recurso não encontrado (se aplicável) | SOAP Fault ou resposta definida pelo serviço | A definir após teste |
-| Serviço indisponível | Falha de conexão/HTTP observada pelo cliente | A definir após teste |
+| Situação                              | Como identificar                             | Comportamento confirmado pelo serviço |
+| ------------------------------------- | -------------------------------------------- | ------------------------------------- |
+| Sucesso                               | Resposta SOAP correspondente à operação      | A definir por operação                |
+| Dados inválidos ou incompletos        | SOAP Fault ou resposta definida pelo serviço | A definir após teste                  |
+| Recurso não encontrado (se aplicável) | SOAP Fault ou resposta definida pelo serviço | A definir após teste                  |
+| Serviço indisponível                  | Falha de conexão/HTTP observada pelo cliente | A definir após teste                  |
 
 Em SOAP, erros de aplicação podem ser representados por **SOAP Fault**; o formato e os códigos dependem do serviço. Não presumir códigos HTTP específicos sem verificá-los na implementação e nos testes.
 

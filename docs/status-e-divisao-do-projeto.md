@@ -8,12 +8,12 @@ Desenvolver e demonstrar um serviço SOAP para o domínio de adoção de pets, i
 
 ## Divisão de responsabilidades
 
-| Integrante | Foco principal | Entregas esperadas |
-|---|---|---|
-| **Patrícia** | Servidor SOAP em Python e operações do serviço. | Implementar e explicar as operações; informar entradas, respostas e erros previstos; apoiar a execução do servidor. |
-| **Erick** | Cliente SOAP em Java, testes no SoapUI e documentação/WSDL. | Implementar e explicar o consumo do serviço; manter o WSDL/documentação coerentes com as operações; preparar testes no SoapUI. |
-| **Bruno** | Contribuição pequena de código e participação na revisão. | Adicionar um teste automatizado para uma operação SOAP existente, seguindo a estrutura do projeto e combinando a operação com Patrícia ou Erick; executar o teste e registrar a contribuição no GitHub. |
-| **Todos** | Revisão, validação do fluxo e apresentação. | Revisar o serviço, testar o fluxo SOAP completo e preparar a apresentação em conjunto. |
+| Integrante   | Foco principal                                              | Entregas esperadas                                                                                                                                                                                      |
+| ------------ | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Patrícia** | Servidor SOAP em Python e operações do serviço.             | Implementar e explicar as operações; informar entradas, respostas e erros previstos; apoiar a execução do servidor.                                                                                     |
+| **Erick**    | Cliente SOAP em Java, testes no SoapUI e documentação/WSDL. | Implementar e explicar o consumo do serviço; manter o WSDL/documentação coerentes com as operações; preparar testes no SoapUI.                                                                          |
+| **Bruno**    | Contribuição pequena de código e participação na revisão.   | Adicionar um teste automatizado para uma operação SOAP existente, seguindo a estrutura do projeto e combinando a operação com Patrícia ou Erick; executar o teste e registrar a contribuição no GitHub. |
+| **Todos**    | Revisão, validação do fluxo e apresentação.                 | Revisar o serviço, testar o fluxo SOAP completo e preparar a apresentação em conjunto.                                                                                                                  |
 
 A responsabilidade principal pelo SOAP fica com Patrícia e Erick. A contribuição de Bruno é delimitada: um teste para uma funcionalidade que já existe, sem exigir que implemente o servidor, o cliente ou uma operação nova.
 
@@ -21,17 +21,17 @@ A responsabilidade principal pelo SOAP fica com Patrícia e Erick. A contribuiç
 
 Preencham o responsável, a data e as evidências quando houver avanço. Enquanto não for confirmado pelo grupo, mantenham como **A iniciar**.
 
-| Etapa | Responsável(is) | Status | Evidência / observação |
-|---|---|---|---|
-| Definir operações e dados do serviço | Patrícia | A iniciar | Preencher após alinhamento do grupo. |
-| Implementar servidor SOAP em Python | Patrícia | A iniciar | Informar como iniciar e como verificar que está ativo. |
-| Definir e conferir contrato WSDL | Erick, com apoio de Patrícia | A iniciar | Registrar onde está o WSDL ou como acessá-lo. |
-| Implementar cliente SOAP em Java | Erick | A iniciar | Registrar como executar e quais operações consome. |
-| Preparar e executar requisições no SoapUI | Erick | A iniciar | Guardar evidência de chamadas e respostas. |
-| Adicionar teste automatizado de operação existente | Bruno, com orientação de Patrícia ou Erick | A iniciar | Informar operação testada e resultado. |
-| Revisar código e documentação | Todos | A iniciar | Anotar ajustes acordados. |
-| Testar o fluxo completo SOAP | Todos | A iniciar | Validar chamada, processamento e resposta. |
-| Preparar e ensaiar apresentação | Todos | A iniciar | Confirmar divisão das falas e demonstração. |
+| Etapa                                              | Responsável(is)                            | Status    | Evidência / observação                                 |
+| -------------------------------------------------- | ------------------------------------------ | --------- | ------------------------------------------------------ |
+| Definir operações e dados do serviço               | Patrícia                                   | A iniciar | Preencher após alinhamento do grupo.                   |
+| Implementar servidor SOAP em Python                | Patrícia                                   | A iniciar | Informar como iniciar e como verificar que está ativo. |
+| Definir e conferir contrato WSDL                   | Erick, com apoio de Patrícia               | A iniciar | Registrar onde está o WSDL ou como acessá-lo.          |
+| Implementar cliente SOAP em Java                   | Erick                                      | A iniciar | Registrar como executar e quais operações consome.     |
+| Preparar e executar requisições no SoapUI          | Erick                                      | A iniciar | Guardar evidência de chamadas e respostas.             |
+| Adicionar teste automatizado de operação existente | Bruno, com orientação de Patrícia ou Erick | A iniciar | Informar operação testada e resultado.                 |
+| Revisar código e documentação                      | Todos                                      | A iniciar | Anotar ajustes acordados.                              |
+| Testar o fluxo completo SOAP                       | Todos                                      | A iniciar | Validar chamada, processamento e resposta.             |
+| Preparar e ensaiar apresentação                    | Todos                                      | A iniciar | Confirmar divisão das falas e demonstração.            |
 
 ### Legenda dos status
 
