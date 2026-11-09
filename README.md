@@ -17,7 +17,7 @@ Este repositório documenta e organiza o projeto SOAP de adoção de pets.
 | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Patrícia** | Lidera o servidor SOAP em Python e as operações do serviço.                                                                                                                        |
 | **Erick**    | Lidera o cliente SOAP em Java, os testes no SoapUI e a documentação/WSDL.                                                                                                          |
-| **Bruno**    | Faz uma contribuição pequena de código: adicionar um teste automatizado para uma operação SOAP existente, com orientação da equipe. Também participa da revisão e da apresentação. |
+| **Bruno**    | Adicionar um teste automatizado para uma operação SOAP existente, com orientação da equipe. Também participa da revisão e da apresentação. |
 | **Todos**    | Revisar este projeto, testar o fluxo SOAP completo e preparar/apresentar o trabalho em conjunto.                                                                                   |
 
 A divisão organiza o trabalho sem exigir que todos implementem o serviço inteiro. Patrícia e Erick lideram a implementação SOAP; Bruno contribui com um teste delimitado e todos se preparam para explicar o fluxo geral.
