@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="4bd83870-69ea-4d70-bf5d-1066825afc3c" activeEnvironment="Default" name="AdocaoPetsSOAP" resourceRoot="" soapui-version="5.10.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="67a10128-1304-4882-8ebb-8b41d6f9040f" wsaVersion="NONE" name="Application" type="wsdl" bindingName="{urn:pareapet:soap}Application" soapVersion="1_1" anonymous="optional" definition="http://127.0.0.1:8000/?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://127.0.0.1:8000/?wsdl"><con:part><con:url>http://127.0.0.1:8000/?wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="urn:pareapet:soap" name="Application" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:plink="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:wsdlsoap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdlsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap11enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap11env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soap12env="http://www.w3.org/2003/05/soap-envelope" xmlns:soap12enc="http://www.w3.org/2003/05/soap-encoding" xmlns:wsa="http://schemas.xmlsoap.org/ws/2003/03/addressing" xmlns:xop="http://www.w3.org/2004/08/xop/include" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="urn:pareapet:soap">
+  <wsdl:types>
+    <xs:schema targetNamespace="urn:pareapet:soap" elementFormDefault="qualified">
+      <xs:complexType name="Pet">
+        <xs:sequence>
+          <xs:element name="id" type="xs:integer" minOccurs="0" nillable="true"/>
+          <xs:element name="nome" type="xs:string" minOccurs="0" nillable="true"/>
+          <xs:element name="especie" type="xs:string" minOccurs="0" nillable="true"/>
+          <xs:element name="porte" type="xs:string" minOccurs="0" nillable="true"/>
+          <xs:element name="status" type="xs:string" minOccurs="0" nillable="true"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Usuario">
+        <xs:sequence>
+          <xs:element name="id" type="xs:integer" minOccurs="0" nillable="true"/>
+          <xs:element name="nome" type="xs:string" minOccurs="0" nillable="true"/>
+          <xs:element name="email" type="xs:string" minOccurs="0" nillable="true"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="adotarPet">
+        <xs:sequence>
+          <xs:element name="pet_id" type="xs:integer" minOccurs="0" nillable="true"/>
+          <xs:element name="usuario_id" type="xs:integer" minOccurs="0" nillable="true"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="adotarPetResponse">
+        <xs:sequence>
+          <xs:element name="adotarPetResult" type="xs:string" minOccurs="0" nillable="true"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cadastrarPet">
+        <xs:sequence>
+          <xs:element name="nome" type="xs:string" minOccurs="0" nillable="true"/>
+          <xs:element name="especie" type="xs:string" minOccurs="0" nillable="true"/>
+          <xs:element name="porte" type="xs:string" minOccurs="0" nillable="true"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cadastrarUsuario">
+        <xs:sequence>
+          <xs:element name="nome" type="xs:string" minOccurs="0" nillable="true"/>
+          <xs:element name="email" type="xs:string" minOccurs="0" nillable="true"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cadastrarPetResponse">
+        <xs:sequence>
+          <xs:element name="cadastrarPetResult" type="tns:Pet" minOccurs="0" nillable="true"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cadastrarUsuarioResponse">
+        <xs:sequence>
+          <xs:element name="cadastrarUsuarioResult" type="tns:Usuario" minOccurs="0" nillable="true"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Pet" type="tns:Pet"/>
+      <xs:element name="Usuario" type="tns:Usuario"/>
+      <xs:element name="adotarPet" type="tns:adotarPet"/>
+      <xs:element name="adotarPetResponse" type="tns:adotarPetResponse"/>
+      <xs:element name="cadastrarPet" type="tns:cadastrarPet"/>
+      <xs:element name="cadastrarUsuario" type="tns:cadastrarUsuario"/>
+      <xs:element name="cadastrarPetResponse" type="tns:cadastrarPetResponse"/>
+      <xs:element name="cadastrarUsuarioResponse" type="tns:cadastrarUsuarioResponse"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="cadastrarPet">
+    <wsdl:part name="cadastrarPet" element="tns:cadastrarPet"/>
+  </wsdl:message>
+  <wsdl:message name="cadastrarPetResponse">
+    <wsdl:part name="cadastrarPetResponse" element="tns:cadastrarPetResponse"/>
+  </wsdl:message>
+  <wsdl:message name="cadastrarUsuario">
+    <wsdl:part name="cadastrarUsuario" element="tns:cadastrarUsuario"/>
+  </wsdl:message>
+  <wsdl:message name="cadastrarUsuarioResponse">
+    <wsdl:part name="cadastrarUsuarioResponse" element="tns:cadastrarUsuarioResponse"/>
+  </wsdl:message>
+  <wsdl:message name="adotarPet">
+    <wsdl:part name="adotarPet" element="tns:adotarPet"/>
+  </wsdl:message>
+  <wsdl:message name="adotarPetResponse">
+    <wsdl:part name="adotarPetResponse" element="tns:adotarPetResponse"/>
+  </wsdl:message>
+  <wsdl:service name="AdocaoPetService">
+    <wsdl:port name="Application" binding="tns:Application">
+      <wsdlsoap11:address location="http://127.0.0.1:8000/"/>
+    </wsdl:port>
+  </wsdl:service>
+  <wsdl:portType name="Application">
+    <wsdl:operation name="cadastrarPet" parameterOrder="cadastrarPet">
+      <wsdl:input name="cadastrarPet" message="tns:cadastrarPet"/>
+      <wsdl:output name="cadastrarPetResponse" message="tns:cadastrarPetResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="cadastrarUsuario" parameterOrder="cadastrarUsuario">
+      <wsdl:input name="cadastrarUsuario" message="tns:cadastrarUsuario"/>
+      <wsdl:output name="cadastrarUsuarioResponse" message="tns:cadastrarUsuarioResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="adotarPet" parameterOrder="adotarPet">
+      <wsdl:input name="adotarPet" message="tns:adotarPet"/>
+      <wsdl:output name="adotarPetResponse" message="tns:adotarPetResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Application" type="tns:Application">
+    <wsdlsoap11:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="cadastrarPet">
+      <wsdlsoap11:operation soapAction="cadastrarPet" style="document"/>
+      <wsdl:input name="cadastrarPet">
+        <wsdlsoap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="cadastrarPetResponse">
+        <wsdlsoap11:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cadastrarUsuario">
+      <wsdlsoap11:operation soapAction="cadastrarUsuario" style="document"/>
+      <wsdl:input name="cadastrarUsuario">
+        <wsdlsoap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="cadastrarUsuarioResponse">
+        <wsdlsoap11:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="adotarPet">
+      <wsdlsoap11:operation soapAction="adotarPet" style="document"/>
+      <wsdl:input name="adotarPet">
+        <wsdlsoap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="adotarPetResponse">
+        <wsdlsoap11:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://127.0.0.1:8000/</con:endpoint></con:endpoints><con:operation id="de15abad-9e5e-49a1-a273-3c8ebcf1326d" isOneWay="false" action="adotarPet" name="adotarPet" bindingOperationName="adotarPet" type="Request-Response" outputName="adotarPetResponse" inputName="adotarPet" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="2d918613-7aeb-4a27-8463-10ea981f9bff" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://127.0.0.1:8000/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:pareapet:soap">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <urn:adotarPet>\r
+         <!--Optional:-->\r
+         <urn:pet_id>1</urn:pet_id>\r
+         <!--Optional:-->\r
+         <urn:usuario_id>999</urn:usuario_id>\r
+      </urn:adotarPet>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="adotarPet"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="36f20074-0f12-44cb-99e4-512d2da1002b" isOneWay="false" action="cadastrarPet" name="cadastrarPet" bindingOperationName="cadastrarPet" type="Request-Response" outputName="cadastrarPetResponse" inputName="cadastrarPet" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c3536b18-956f-4070-a861-eafa0313e4b4" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://127.0.0.1:8000/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:pareapet:soap">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <urn:cadastrarPet>\r
+         <!--Optional:-->\r
+         <urn:nome>Luna</urn:nome>\r
+         <!--Optional:-->\r
+         <urn:especie>Canina</urn:especie>\r
+         <!--Optional:-->\r
+         <urn:porte>Pequeno</urn:porte>\r
+      </urn:cadastrarPet>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="cadastrarPet"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="aa8cb308-26eb-4d62-8a2b-437f348419d3" isOneWay="false" action="cadastrarUsuario" name="cadastrarUsuario" bindingOperationName="cadastrarUsuario" type="Request-Response" outputName="cadastrarUsuarioResponse" inputName="cadastrarUsuario" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d15ff7be-9a13-417b-9e04-bea840e9c35b" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://127.0.0.1:8000/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:pareapet:soap">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <urn:cadastrarUsuario>\r
+         <!--Optional:-->\r
+         <urn:nome>Joao</urn:nome>\r
+         <!--Optional:-->\r
+         <urn:email>emailinvalido</urn:email>\r
+      </urn:cadastrarUsuario>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="cadastrarUsuario"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="718e7872-dc54-4dfe-841e-1c6cf7f0a43c" name="TestSuite 1"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="ea3076fe-5347-4c77-a68c-4b2c6acef134" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase 1" searchProperties="true"><con:settings/><con:testStep type="request" id="26ac5e11-f09e-412a-8af4-d6d7641ce9cf" name="cadastrarUsuario - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>Application</con:interface><con:operation>cadastrarUsuario</con:operation><con:request name="cadastrarUsuario - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="0a85bfb5-2429-48cc-8a73-8fcf03951c65"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://127.0.0.1:8000/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:pareapet:soap">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <urn:cadastrarUsuario>\r
+         <!--Optional:-->\r
+         <urn:nome>Maria</urn:nome>\r
+         <!--Optional:-->\r
+         <urn:email>maria@email.com</urn:email>\r
+      </urn:cadastrarUsuario>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="f26d01b8-6fc1-4fd8-9ce3-b7880eb4e26a" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="cadastrarUsuario"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
