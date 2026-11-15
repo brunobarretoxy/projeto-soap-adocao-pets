@@ -1,0 +1,25 @@
+# === JAVA / MAVEN (Seu lado) ===
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.log
+
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+.pytest_cache/
+
+# === VS CODE / IDEs ===
+.vscode/
+.idea/
+*.iml
+
+# === SISTEMA OPERACIONAL (Ubuntu / macOS / Windows) ===
+*~
+.DS_Store
+Thumbs.db
