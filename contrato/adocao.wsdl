@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="AdocaoService"
+    targetNamespace="http://adocao.com/"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:tns="http://adocao.com/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <!-- Os próximos blocos entram aqui dentro -->
+
+</definitions>
