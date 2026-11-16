@@ -14,7 +14,6 @@
     </properties>
 
     <dependencies>
-        <!-- Biblioteca JAX-WS (Metro) para comunicação SOAP no Java moderno -->
         <dependency>
             <groupId>com.sun.xml.ws</groupId>
             <artifactId>jaxws-rt</artifactId>
@@ -24,7 +23,6 @@
 
     <build>
         <plugins>
-            <!-- Plugin que lê o WSDL e gera as classes Java automaticamente -->
             <plugin>
                 <groupId>com.sun.xml.ws</groupId>
                 <artifactId>jaxws-maven-plugin</artifactId>
@@ -35,11 +33,9 @@
                             <goal>wsimport</goal>
                         </goals>
                         <configuration>
-                            <!-- Lê o contrato compartilhado fora da pasta cliente-java -->
-                            <wsdlFiles>
-                                <wsdlFile>${project.basedir}/../contrato/adocao.wsdl</wsdlFile>
-                            </wsdlFiles>
-                            <!-- Pacote onde as classes geradas vão ficar -->
+                            <wsdlUrls>
+                                <wsdlUrl>http://127.0.0.1:8000/?wsdl</wsdlUrl>
+                            </wsdlUrls>
                             <packageName>adocao.ws</packageName>
                         </configuration>
                     </execution>
