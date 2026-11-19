@@ -1,0 +1,287 @@
+================================================================================
+PROJETO SOAP - ADOÇÃO DE PETS
+EVIDÊNCIAS DE FUNCIONALIDADE
+================================================================================
+
+DATA: 2026-11-19
+EQUIPE: Bruno, Patrícia, Erick
+
+================================================================================
+1. SERVIDOR SOAP EM EXECUÇÃO
+================================================================================
+
+✓ Servidor iniciado com sucesso em Python (Flask + lxml)
+✓ Endpoint disponível: http://127.0.0.1:8000/soap
+✓ WSDL acessível em: http://127.0.0.1:8000/
+✓ Port: 8000
+✓ Status: RODANDO E RESPONDENDO
+
+Resposta do servidor (primeiras linhas do WSDL):
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:tns="urn:pareapet:soap"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             name="AdocaoPetService"
+             targetNamespace="urn:pareapet:soap">
+---
+
+================================================================================
+2. CLIENTE PYTHON (ZEEP) - TESTE DE OPERAÇÕES
+================================================================================
+
+Resultado da execução: SUCESSO
+
+[1] CADASTRANDO USUARIO...
+[OK] Usuario cadastrado:
+   ID: 1
+   Nome: Joao Silva
+   Email: joao@email.com
+
+[2] CADASTRANDO PET...
+[OK] Pet cadastrado:
+   ID: 1
+   Nome: Rex
+   Especie: Cachorro
+   Porte: Grande
+   Status: Disponivel
+
+[3] REALIZANDO ADOCAO...
+[OK] Adoção realizada com sucesso! Pet: Rex. Adotante: Joao Silva.
+
+[4] TESTANDO ERRO (tentando adotar pet ja adotado)...
+[ERRO ESPERADO] Este pet não está disponível.
+
+[5] TESTANDO ERRO (email invalido)...
+[ERRO ESPERADO] Informe um email válido.
+
+[6] CADASTRANDO SEGUNDO USUARIO...
+[OK] Segundo usuario cadastrado: Mariana Costa (ID: 2)
+
+[7] CADASTRANDO SEGUNDO PET...
+[OK] Segundo pet cadastrado: Floquinho (ID: 2)
+
+[8] ADOTANDO SEGUNDO PET...
+[OK] Adoção realizada com sucesso! Pet: Floquinho. Adotante: Mariana Costa.
+
+[SUCESSO] TODOS OS TESTES EXECUTADOS COM SUCESSO!
+
+================================================================================
+3. CLIENTE JAVA - TESTE DE OPERAÇÕES
+================================================================================
+
+Compilação: ✓ SUCESSO (com warnings de APIs deprecadas, esperado)
+Execução: ✓ SUCESSO
+
+===================================================================
+CLIENTE JAVA - TESTANDO SERVICO SOAP DE ADOCAO DE PETS
+===================================================================
+
+[1] CADASTRANDO USUARIO...
+[OK] Usuario cadastrado
+    ID: 3
+    Email: carlos@email.com
+
+[2] CADASTRANDO PET...
+[OK] Pet cadastrado
+    ID: 3
+    Nome: Thor
+    Status: Disponivel
+
+[3] REALIZANDO ADOCAO...
+[OK] Adoção realizada com sucesso! Pet: Thor. Adotante: Carlos Mendes.
+
+[4] TESTANDO ERRO (tentando adotar pet ja adotado)...
+[ERRO ESPERADO] Este pet não está disponível.
+
+[5] TESTANDO ERRO (email invalido)...
+[ERRO ESPERADO] Informe um email válido.
+
+===================================================================
+[SUCESSO] TODOS OS TESTES EXECUTADOS COM SUCESSO!
+===================================================================
+
+================================================================================
+4. VALIDAÇÃO DAS OPERAÇÕES
+================================================================================
+
+OPERAÇÃO 1: cadastrarPet
+✓ Entrada: nome (string), especie (string), porte (string)
+✓ Resposta: Pet completo com ID, nome, especie, porte, status="Disponivel"
+✓ Validação de erro: campos vazios retornam SOAP Fault com mensagem apropriada
+
+OPERAÇÃO 2: cadastrarUsuario
+✓ Entrada: nome (string), email (string)
+✓ Resposta: Usuario completo com ID, nome, email
+✓ Validação de erro: email inválido e duplicado retornam SOAP Fault
+
+OPERAÇÃO 3: adotarPet
+✓ Entrada: petId (integer), usuarioId (integer)
+✓ Resposta: String com mensagem de sucesso
+✓ Regra de negócio: pet com status "Adotado" não pode ser adotado novamente
+✓ Validação de erro: recurso não encontrado retorna SOAP Fault apropriada
+
+================================================================================
+5. ESTRUTURA DO ENVELOPE SOAP
+================================================================================
+
+Exemplo de requisição válida (cadastrarPet):
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <tns:cadastrarPet xmlns:tns="urn:pareapet:soap">
+      <nome>Rex</nome>
+      <especie>Cachorro</especie>
+      <porte>Grande</porte>
+    </tns:cadastrarPet>
+  </soap:Body>
+</soap:Envelope>
+---
+
+Exemplo de resposta bem-sucedida:
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <tns:cadastrarPetResponse xmlns:tns="urn:pareapet:soap">
+      <result>
+        <id>1</id>
+        <nome>Rex</nome>
+        <especie>Cachorro</especie>
+        <porte>Grande</porte>
+        <status>Disponivel</status>
+      </result>
+    </tns:cadastrarPetResponse>
+  </soap:Body>
+</soap:Envelope>
+---
+
+Exemplo de SOAP Fault (erro):
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <soap:Fault>
+      <faultcode>Client</faultcode>
+      <faultstring>O nome do pet é obrigatório.</faultstring>
+    </soap:Fault>
+  </soap:Body>
+</soap:Envelope>
+---
+
+================================================================================
+6. CARACTERÍSTICAS IMPLEMENTADAS
+================================================================================
+
+✓ Uso correto de Envelope SOAP 1.1
+✓ Body e namespaces corretamente configurados (urn:pareapet:soap)
+✓ Publicação local do endpoint (http://127.0.0.1:8000/)
+✓ Geração de WSDL funcional (acessível no endereço raiz)
+✓ Mínimo de 2 operações (3 implementadas: cadastrarPet, cadastrarUsuario, adotarPet)
+✓ Cliente consumidor em linguagem diferente do servidor
+✓ Testes completos com sucesso (Python + Java)
+✓ Validação de chamadas bem-sucedidas
+✓ Tratamento básico de erro com SOAP Fault
+✓ Dados simulados em memória
+✓ Operações síncronas
+✓ Estrutura procedural simples
+
+================================================================================
+7. INTEROPERABILIDADE CONFIRMADA
+================================================================================
+
+✓ Servidor Python (Spyne-like com Flask + lxml) <-> Cliente Python (Zeep): OK
+✓ Servidor Python (Spyne-like com Flask + lxml) <-> Cliente Java (manual): OK
+✓ WSDL acessível por múltiplos clientes: OK
+✓ Comportamento consistente em múltiplas plataformas: OK
+
+================================================================================
+8. REQUISITOS TÉCNICOS - CHECKLIST COMPLETO
+================================================================================
+
+Escopo Obrigatório:
+[✓] Um servidor SOAP (Python com Flask + lxml)
+[✓] Um contrato WSDL funcional e acessível (http://127.0.0.1:8000/)
+[✓] Pelo menos duas operações expostas (3 implementadas)
+[✓] Um cliente consumidor em linguagem diferente (Java + Python)
+[✓] Testes completos (executados com sucesso)
+[✓] Documentação do serviço (contrato-api.md atualizado)
+
+Requisitos Mínimos Técnicos:
+[✓] Uso correto de Envelope, Body e namespaces SOAP
+[✓] Publicação local do endpoint
+[✓] Geração automática do WSDL
+[✓] Validação de chamadas bem-sucedidas
+[✓] Tratamento básico de erro (SOAP Fault)
+
+Restrições Técnicas Atendidas:
+[✓] Não usa REST ou JSON como mecanismo principal
+[✓] Não usa frameworks que abstraem totalmente SOAP sem intervenção
+
+Simplificações Permitidas:
+[✓] Dados simulados em memória
+[✓] Operações síncronas
+[✓] Endpoints locais (localhost)
+[✓] Estrutura procedural simples
+
+================================================================================
+9. JUSTIFICATIVA TÉCNICA - POR QUE SOAP FOI ADEQUADO AO CENÁRIO
+================================================================================
+
+SOAP foi escolhido para este serviço de adoção de pets por:
+
+1. INTEROPERABILIDADE: SOAP é independente de linguagem e plataforma. Prova: 
+   servidor em Python é consumido com sucesso por cliente Java e Python.
+
+2. CONTRATO FORMAL: O WSDL define explicitamente as operações, tipos e comportamentos,
+   eliminando ambiguidades. Clientes podem gerar stubs automaticamente.
+
+3. VALIDAÇÃO FORTE: SOAP permite especificar tipos complexos, campos obrigatórios
+   e estrutura rigorosa das mensagens, ideal para garantir dados corretos.
+
+4. TRATAMENTO DE ERROS: SOAP Faults fornecem mecanismo padrão para erros de aplicação,
+   com código e mensagem estruturados, sem depender de códigos HTTP.
+
+5. CONTEXTO ACADÊMICO: Este projeto demonstra um protocolo consolidado e maduro,
+   apropriado para fins educacionais sobre integração de sistemas.
+
+LIMITAÇÕES COMPARADAS COM REST:
+- REST seria mais simples para esta aplicação pequena
+- JSON seria mais leve que XML
+- Mas SOAP serve melhor ao objetivo pedagógico de aprender interoperabilidade
+
+================================================================================
+10. DIFICULDADES TÉCNICAS ENFRENTADAS E SOLUÇÕES
+================================================================================
+
+DIFICULDADE 1: Compatibilidade Spyne com Python 3.14
+- PROBLEMA: Spyne 2.14.0 não é compatível com Python 3.14 (módulo six.moves faltante)
+- SOLUÇÃO: Implementar servidor alternativo usando Flask + lxml diretamente
+- RESULTADO: Servidor funcional 100%, sem dependência de Spyne
+
+DIFICULDADE 2: Ausência de Maven no ambiente
+- PROBLEMA: Cliente Java original usava Maven para gerar stubs via wsimport
+- SOLUÇÃO: Implementar cliente Java simples que constrói requisições SOAP manualmente
+- RESULTADO: Cliente Java compilado e testado com sucesso, sem Maven
+
+DIFICULDADE 3: Encoding de caracteres no Windows
+- PROBLEMA: Console Windows não suporta UTF-8 diretamente em Python
+- SOLUÇÃO: Remover emojis e usar ASCII puro nos testes
+- RESULTADO: Output legível em ambos os ambientes
+
+================================================================================
+CONCLUSÃO
+================================================================================
+
+✓ Projeto SOAP totalmente funcional e validado
+✓ Servidor respondendo corretamente em http://127.0.0.1:8000/
+✓ WSDL acessível e bem-formado
+✓ Duas plataformas diferentes (Python e Java) consumindo o serviço com sucesso
+✓ Todas as 3 operações testadas e validadas
+✓ Tratamento de erros funcionando corretamente
+✓ Documentação completa e precisa
+✓ Pronto para apresentação e avaliação
+
+Requisitos do professor ATENDIDOS COM SUCESSO.

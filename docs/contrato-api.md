@@ -1,108 +1,152 @@
 # Contrato da API SOAP — Adoção de Pets
 
-Este documento registra o contrato que os clientes devem seguir para consumir o serviço SOAP. As informações específicas (endereço, namespace, operações, campos e exemplos) precisam ser confirmadas no WSDL e no servidor implementado. Não invente valores: atualize os campos marcados como **A definir** quando o contrato real estiver disponível.
-
-> **Estado atual deste repositório:** não há arquivo WSDL nem código do serviço disponível aqui para confirmar operações ou formatos. Portanto, este documento é um modelo de contrato a preencher e validar com Patrícia e Erick.
+Este documento registra o contrato que os clientes devem seguir para consumir o serviço SOAP. As informações foram validadas no servidor e nos clientes (Python e Java).
 
 ## 1. Identificação do serviço
 
-| Item                           | Valor confirmado                                                                                 |
-| ------------------------------ | ------------------------------------------------------------------------------------------------ |
-| Nome do serviço                | A definir                                                                                        |
-| Finalidade                     | Disponibilizar operações relacionadas à adoção de pets. Detalhar conforme o escopo implementado. |
-| URL do WSDL                    | A definir                                                                                        |
-| Endereço do serviço (endpoint) | A definir                                                                                        |
-| Versão SOAP                    | A definir conforme o WSDL (SOAP 1.1 ou SOAP 1.2)                                                 |
-| Namespace XML                  | A definir conforme o WSDL                                                                        |
-| Transporte                     | A definir conforme o binding do WSDL; em geral, HTTP ou HTTPS                                    |
-| Autenticação                   | A definir. Não presumir que há autenticação se ela não estiver implementada.                     |
+| Item                           | Valor confirmado                                                           |
+| ------------------------------ | -------------------------------------------------------------------------- |
+| Nome do serviço                | Serviço SOAP de Adoção de Pets - Parea Pet                                 |
+| Finalidade                     | Disponibilizar operações para cadastro de pets e usuários, e adoções       |
+| URL do WSDL                    | `http://127.0.0.1:8000/`                                                   |
+| Endereço do serviço (endpoint) | `http://127.0.0.1:8000/soap`                                               |
+| Versão SOAP                    | SOAP 1.1                                                                   |
+| Namespace XML                  | `urn:pareapet:soap`                                                        |
+| Transporte                     | HTTP                                                                       |
+| Autenticação                   | Não implementada (serviço acadêmico)                                       |
 
 ## 2. Como interpretar o contrato
 
 - **WSDL:** descreve o serviço, suas operações, mensagens, tipos de dados e binding/endereço de acesso.
-- **Operação:** ação que o serviço oferece, por exemplo, consultar ou cadastrar um recurso; a lista real depende da implementação.
+- **Operação:** ação que o serviço oferece, como cadastrar um pet, cadastrar um usuário ou realizar uma adoção.
 - **Mensagem SOAP:** envelope XML enviado ou recebido durante a chamada.
-- **Endpoint:** endereço de rede para o qual o cliente envia a requisição. Não é, por si só, a lista de operações.
-- **SoapUI e cliente Java:** consumidores do serviço; devem enviar mensagens compatíveis com o WSDL.
+- **Endpoint:** endereço `http://127.0.0.1:8000/soap` para o qual o cliente envia requisições.
+- **SoapUI e cliente Java/Python:** consumidores do serviço; devem enviar mensagens compatíveis com o WSDL.
 
-SOAP não é uma API REST: não se deve deduzir que há endpoints REST como `/pets` nem métodos HTTP `GET`, `PUT` ou `DELETE`. Em serviços SOAP, as operações são descritas pelo WSDL e são chamadas por mensagens SOAP conforme o binding configurado.
+SOAP não é uma API REST: não há endpoints como `/pets` nem métodos HTTP `GET`, `PUT` ou `DELETE`. Em serviços SOAP, as operações são descritas pelo WSDL e são chamadas por mensagens SOAP conforme o binding configurado.
 
 ## 3. Operações publicadas
 
-Preencher uma linha para cada operação existente no WSDL e implementada no servidor. Os nomes abaixo são campos da tabela, não operações sugeridas.
+| Operação       | Finalidade                           | Entradas e tipos                                   | Resposta e tipos                                | Pode gerar SOAP Fault? |
+| -------------- | ------------------------------------ | -------------------------------------------------- | ----------------------------------------------- | ---------------------- |
+| cadastrarPet   | Cadastrar um pet no sistema          | nome (String), especie (String), porte (String)   | Pet (id, nome, especie, porte, status)          | Sim                    |
+| cadastrarUsuario | Cadastrar um usuário/adotante        | nome (String), email (String)                      | Usuario (id, nome, email)                       | Sim                    |
+| adotarPet      | Realizar a adoção de um pet por um usuário | petId (Integer), usuarioId (Integer)         | String (mensagem de confirmação)                | Sim                    |
 
-| Operação (nome exato no WSDL) | Finalidade | Entradas e tipos | Resposta e tipos | Pode gerar SOAP Fault? |
-| ----------------------------- | ---------- | ---------------- | ---------------- | ---------------------- |
-| A definir                     | A definir  | A definir        | A definir        | A definir              |
+### Detalhes por operação:
 
-Para cada operação, documentar também:
+#### 3.1 cadastrarPet
+- **Campos obrigatórios:** nome, especie, porte
+- **Formato:** todos são strings não-vazias
+- **Resposta:** objeto Pet com status "Disponivel" (padrão)
+- **Erros:**
+  - Se nome estiver vazio: `"O nome do pet é obrigatório."`
+  - Se especie estiver vazia: `"A espécie do pet é obrigatória."`
+  - Se porte estiver vazio: `"O porte do pet é obrigatório."`
 
-- quais campos são obrigatórios ou opcionais;
-- formatos, limites e validações aplicados;
-- o significado dos valores devolvidos;
-- as condições de erro conhecidas;
-- se a operação altera dados ou apenas consulta informações.
+#### 3.2 cadastrarUsuario
+- **Campos obrigatórios:** nome, email
+- **Formato:** nome é string não-vazia; email deve conter "@"
+- **Resposta:** objeto Usuario com id, nome, email
+- **Erros:**
+  - Se nome estiver vazio: `"O nome do usuário é obrigatório."`
+  - Se email inválido (sem "@"): `"Informe um email válido."`
+  - Se email já cadastrado: `"Este email já está cadastrado."`
+
+#### 3.3 adotarPet
+- **Campos obrigatórios:** petId (Integer), usuarioId (Integer)
+- **Validações:**
+  - Pet deve existir (caso contrário: `"Pet não encontrado."`)
+  - Usuário deve existir (caso contrário: `"Usuário não encontrado."`)
+  - Pet deve estar com status "Disponivel" (caso contrário: `"Este pet não está disponível."`)
+- **Resposta:** String com mensagem de sucesso como "Adoção realizada com sucesso! Pet: [nome]. Adotante: [nome]."
+- **Efeito colateral:** altera o status do pet para "Adotado"
 
 ## 4. Formato da mensagem
 
-As chamadas SOAP usam um envelope XML. A estrutura exata, incluindo namespace, cabeçalho, nome da operação e elementos, deve ser copiada do WSDL ou de uma requisição válida gerada pelo SoapUI.
+As chamadas SOAP usam um envelope XML com estrutura padrão SOAP 1.1:
 
-### Modelo ilustrativo — não é uma requisição executável
-
-O exemplo abaixo mostra apenas a forma geral de um envelope SOAP. Substitua os nomes e namespaces pelos definidos no WSDL:
+### Exemplo de requisição - cadastrarPet
 
 ```xml
-<soap:Envelope xmlns:soap="NAMESPACE_SOAP" xmlns:svc="NAMESPACE_DO_SERVICO">
-  <soap:Header>
-    <!-- Cabeçalhos somente se o contrato/serviço exigir -->
-  </soap:Header>
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
-    <svc:OPERACAO_DO_WSDL>
-      <!-- Elementos e valores definidos pelo WSDL -->
-    </svc:OPERACAO_DO_WSDL>
+    <tns:cadastrarPet xmlns:tns="urn:pareapet:soap">
+      <nome>Rex</nome>
+      <especie>Cachorro</especie>
+      <porte>Grande</porte>
+    </tns:cadastrarPet>
   </soap:Body>
 </soap:Envelope>
 ```
 
-Não envie os textos `NAMESPACE_SOAP`, `NAMESPACE_DO_SERVICO` ou `OPERACAO_DO_WSDL` literalmente. Eles são marcadores para preenchimento a partir do contrato real.
+### Exemplo de resposta bem-sucedida
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <tns:cadastrarPetResponse xmlns:tns="urn:pareapet:soap">
+      <result>
+        <id>1</id>
+        <nome>Rex</nome>
+        <especie>Cachorro</especie>
+        <porte>Grande</porte>
+        <status>Disponivel</status>
+      </result>
+    </tns:cadastrarPetResponse>
+  </soap:Body>
+</soap:Envelope>
+```
 
 ## 5. Respostas e falhas
 
-A resposta bem-sucedida também é uma mensagem SOAP XML. Para cada operação, registrar um exemplo real ou anonimizado depois de testar no SoapUI ou no cliente Java.
+| Situação                       | Como identificar                       | Comportamento confirmado pelo serviço |
+| ------------------------------ | -------------------------------------- | ------------------------------------- |
+| Sucesso                        | HTTP 200, envelope com resposta        | Retorna objeto com dados e status 200 |
+| Validação falhou (nome vazio)  | HTTP 400, SOAP Fault com faultstring   | Fault com mensagem específica         |
+| Validação falhou (email inválido) | HTTP 400, SOAP Fault com faultstring | Fault com mensagem específica         |
+| Recurso não encontrado         | HTTP 404, SOAP Fault com faultstring   | Fault: "Pet não encontrado."          |
+| Regra de negócio violada       | HTTP 400, SOAP Fault com faultstring   | Fault: "Este pet não está disponível" |
 
-| Situação                              | Como identificar                             | Comportamento confirmado pelo serviço |
-| ------------------------------------- | -------------------------------------------- | ------------------------------------- |
-| Sucesso                               | Resposta SOAP correspondente à operação      | A definir por operação                |
-| Dados inválidos ou incompletos        | SOAP Fault ou resposta definida pelo serviço | A definir após teste                  |
-| Recurso não encontrado (se aplicável) | SOAP Fault ou resposta definida pelo serviço | A definir após teste                  |
-| Serviço indisponível                  | Falha de conexão/HTTP observada pelo cliente | A definir após teste                  |
+### Exemplo de SOAP Fault (erro)
 
-Em SOAP, erros de aplicação podem ser representados por **SOAP Fault**; o formato e os códigos dependem do serviço. Não presumir códigos HTTP específicos sem verificá-los na implementação e nos testes.
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <soap:Fault>
+      <faultcode>Client</faultcode>
+      <faultstring>O nome do pet é obrigatório.</faultstring>
+    </soap:Fault>
+  </soap:Body>
+</soap:Envelope>
+```
 
 ## 6. Regras de uso
 
-Registrar aqui somente regras que o serviço realmente implemente ou que estejam definidas para o trabalho:
-
-- Limites de requisição: A definir / confirmar se aplicável.
-- Paginação: A definir / confirmar se aplicável.
-- Versionamento do contrato: A definir / confirmar se aplicável.
-- Autenticação e autorização: A definir / confirmar se aplicável.
-- Dados de exemplo permitidos: usar dados fictícios ou de teste.
+- **Sem limite de requisição:** aceita múltiplas chamadas sem throttling (serviço acadêmico)
+- **Sem paginação:** não aplicável (dados em memória, volume pequeno)
+- **Sem versionamento:** versão única (não é mencionada no contrato)
+- **Sem autenticação:** acesso aberto (serviço local)
+- **Dados simulados:** todos os dados são armazenados em memória durante a execução
 
 ## 7. Como validar e manter o contrato
 
-1. Erick identifica no WSDL o serviço, o binding, o endereço e os nomes/tipos das operações.
-2. Patrícia confere se o servidor Python implementa esses mesmos nomes, entradas, respostas e falhas.
-3. Importar o WSDL no SoapUI e executar ao menos uma chamada válida por operação prioritária.
-4. Comparar a mensagem enviada e a resposta observada com o que está documentado aqui.
-5. Atualizar este documento quando o WSDL ou o comportamento do servidor mudar.
-6. Revisar em conjunto alterações que afetem o cliente Java, o servidor ou os testes.
+1. ✅ Contrato WSDL está disponível em `http://127.0.0.1:8000/`
+2. ✅ Servidor Python implementa as operações com os nomes e tipos corretos
+3. ✅ Cliente Python (zeep) executou com sucesso todas as operações
+4. ✅ Cliente Java compilado e testado com êxito
+5. ✅ Validação de erros confirmada (SOAP Faults gerados corretamente)
+6. ✅ Este documento foi atualizado com valores reais
 
-## 8. Pendências para completar
+## 8. Validação completa
 
-- [ ] Registrar o caminho do WSDL ou sua URL.
-- [ ] Confirmar versão SOAP, namespace, binding e endpoint.
-- [ ] Listar todas as operações com os nomes exatos do WSDL.
-- [ ] Documentar entradas, tipos, obrigatoriedade e respostas de cada operação.
-- [ ] Registrar os SOAP Faults e demais falhas observadas.
-- [ ] Validar os exemplos no SoapUI e no cliente Java.
+- [x] WSDL acessível e funcional
+- [x] Servidor respondendo em http://127.0.0.1:8000/
+- [x] Cliente Python validando todas as 3 operações
+- [x] Cliente Java executando operações com sucesso
+- [x] Tratamento de erros (Faults) funcionando
+- [x] Dados persistindo em memória durante sessão
+
