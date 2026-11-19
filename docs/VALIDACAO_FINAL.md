@@ -147,14 +147,19 @@ ERROS:  Recurso não encontrado, pet já adotado → SOAP Fault
 ```
 projeto-soap-adocao-pets/
 ├── servidor-python/
-│   └── servidor_alternativo.py      # Servidor SOAP (Flask + lxml)
+│   ├── servidor_alternativo.py      # Servidor SOAP (Flask + lxml)
+│   └── requirements.txt
 ├── cliente-python-teste.py          # Cliente de teste (Zeep)
 ├── adocao/
 │   └── ClienteSoapSimples.java      # Cliente Java (manual)
 ├── docs/
-│   ├── contrato-api.md              # Contrato com valores reais ✅
+│   ├── DOCUMENTO_ENTREGA.md         # Documento entrega
+│   ├── VALIDACAO_FINAL.md           # Esta validação
+│   ├── ROTEIRO_APRESENTACAO.md      # Para apresentação
+│   ├── EVIDENCIAS.txt               # Logs testes
+│   ├── INICIO_RAPIDO.md             # Quick start
+│   ├── contrato-api.md              # Contrato SOAP
 │   └── AdocaoPetsSOAP.wsdl          # WSDL gerado
-├── EVIDENCIAS.txt                   # Resultados dos testes
 ├── README.md                        # Documentação geral
 └── .git/                            # Histórico com commits
 ```

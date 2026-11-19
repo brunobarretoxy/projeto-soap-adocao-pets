@@ -95,11 +95,7 @@ ERRO:   SOAP Fault se recurso não encontrado ou pet já adotado
    - Mostrar WSDL com as 3 operações definidas
    - Destacar namespace: `urn:pareapet:soap`
 
-3. Voltar ao terminal e mostrar logs de requisições:
-   ```
-   127.0.0.1 - - [19/Nov/2026 07:30:00] "GET / HTTP/1.1" 200 -
-   127.0.0.1 - - [19/Nov/2026 07:30:05] "POST /soap HTTP/1.1" 200 -
-   ```
+3. Voltar ao terminal e mostrar logs de requisições
 
 ---
 
@@ -109,25 +105,7 @@ ERRO:   SOAP Fault se recurso não encontrado ou pet já adotado
 
 1. Executar: `python cliente-python-teste.py`
 
-2. Mostrar output:
-   ```
-   [1] CADASTRANDO USUARIO...
-   [OK] Usuario cadastrado: ID: 1, Email: joao@email.com
-   
-   [2] CADASTRANDO PET...
-   [OK] Pet cadastrado: ID: 1, Nome: Rex, Status: Disponivel
-   
-   [3] REALIZANDO ADOCAO...
-   [OK] Adoção realizada com sucesso! Pet: Rex. Adotante: Joao Silva.
-   
-   [4] TESTANDO ERRO (tentando adotar pet ja adotado)...
-   [ERRO ESPERADO] Este pet não está disponível.
-   
-   [5] TESTANDO ERRO (email invalido)...
-   [ERRO ESPERADO] Informe um email válido.
-   
-   [SUCESSO] TODOS OS TESTES EXECUTADOS COM SUCESSO!
-   ```
+2. Mostrar output com sucessos e validações de erro
 
 3. **Explicar:**
    - 8 testes executados com sucesso
@@ -142,31 +120,7 @@ ERRO:   SOAP Fault se recurso não encontrado ou pet já adotado
 
 1. Compilar e executar: `java -cp . adocao.ClienteSoapSimples`
 
-2. Mostrar output:
-   ```
-   ===================================================================
-   CLIENTE JAVA - TESTANDO SERVICO SOAP DE ADOCAO DE PETS
-   ===================================================================
-   
-   [1] CADASTRANDO USUARIO...
-   [OK] Usuario cadastrado: ID: 3, Email: carlos@email.com
-   
-   [2] CADASTRANDO PET...
-   [OK] Pet cadastrado: ID: 3, Nome: Thor, Status: Disponivel
-   
-   [3] REALIZANDO ADOCAO...
-   [OK] Adoção realizada com sucesso! Pet: Thor. Adotante: Carlos Mendes.
-   
-   [4] TESTANDO ERRO (tentando adotar pet ja adotado)...
-   [ERRO ESPERADO] Este pet não está disponível.
-   
-   [5] TESTANDO ERRO (email invalido)...
-   [ERRO ESPERADO] Informe um email válido.
-   
-   ===================================================================
-   [SUCESSO] TODOS OS TESTES EXECUTADOS COM SUCESSO!
-   ===================================================================
-   ```
+2. Mostrar output com sucessos e validações de erro
 
 3. **Destacar:**
    - 5 testes executados com sucesso
@@ -194,16 +148,6 @@ ERRO:   SOAP Fault se recurso não encontrado ou pet já adotado
 - Validação de chamadas
 - Tratamento de erro (SOAP Fault)
 
-✅ **Restrições (2/2)**
-- Sem REST/JSON como mecanismo principal
-- Sem frameworks que abstraem totalmente SOAP
-
-✅ **Simplificações (4/4)**
-- Dados em memória
-- Operações síncronas
-- Endpoints locais
-- Estrutura procedural
-
 ---
 
 ## 🎓 SLIDE 8: CONCEITOS DEMONSTRADOS (1 minuto)
@@ -227,28 +171,6 @@ ERRO:   SOAP Fault se recurso não encontrado ou pet já adotado
 ✅ 13/13 testes passando (8 Python + 5 Java)
 ✅ Interoperabilidade comprovada
 ✅ Documentação completa
-✅ Pronto para produção acadêmica
-
-**Frase de encerramento:** "Demonstramos que SOAP é uma escolha viável para sistemas que requerem contrato formal, validação forte e interoperabilidade real entre plataformas diferentes."
-
----
-
-## 📚 REFERÊNCIAS RÁPIDAS PARA PERGUNTAS
-
-### P: Por que SOAP e não REST?
-**R:** SOAP oferece contrato formal (WSDL), validação forte de tipos, e tratamento padrão de erros. REST seria mais simples, mas SOAP demonstra interoperabilidade real de verdade.
-
-### P: Qual foi a maior dificuldade?
-**R:** Compatibilidade do Spyne com Python 3.14. Solução: Implementar servidor alternativo com Flask + lxml, mantendo 100% de conformidade SOAP.
-
-### P: Por que dois clientes (Python e Java)?
-**R:** Para demonstrar interoperabilidade real. Mesmo servidor sendo consumido por linguagens diferentes comprova que SOAP funciona como esperado.
-
-### P: Como é tratado o erro?
-**R:** Via SOAP Fault padrão. Cliente envia requisição inválida, servidor responde com Fault contendo faultcode e faultstring descritiva. Clientes interpretam e exibem mensagem clara.
-
-### P: Os dados persistem entre execuções?
-**R:** Não. Estão em memória Python. Reiniciar servidor limpa dados. Adequado para projeto acadêmico.
 
 ---
 

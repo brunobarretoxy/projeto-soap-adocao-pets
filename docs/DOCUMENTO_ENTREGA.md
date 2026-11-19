@@ -46,7 +46,6 @@ Projeto acadêmico de Serviço Web SOAP **completo e funcional**, atendendo a 10
 ```
 servidor-python/
 ├── servidor_alternativo.py      ✅ Servidor SOAP funcional (368 linhas)
-├── servidor.py                  (Original - referência)
 └── requirements.txt
 
 cliente-python-teste.py          ✅ Cliente Python para testes (100 linhas)
@@ -58,21 +57,18 @@ adocao/
 ### Documentação
 ```
 docs/
-├── contrato-api.md              ✅ ATUALIZADO com valores reais
-├── AdocaoPetsSOAP.wsdl          ✅ WSDL auto-gerado
-├── execucao-e-apresentacao.md   (Referência)
-├── guia-apresentacao-e-defesa.md (Referência)
-└── status-e-divisao-do-projeto.md (Referência)
-
-docs/VALIDACAO_FINAL.md              ✅ Checklist completo de validação
-docs/EVIDENCIAS.txt                  ✅ Logs de execução dos testes
-docs/ROTEIRO_APRESENTACAO.md         ✅ Guia de apresentação (10 min)
-README.md                       ✅ ATUALIZADO
+├── DOCUMENTO_ENTREGA.md              ✅ Este documento
+├── VALIDACAO_FINAL.md                ✅ Checklist de requisitos
+├── ROTEIRO_APRESENTACAO.md           ✅ Guia para 10 minutos
+├── EVIDENCIAS.txt                    ✅ Logs de testes
+├── INICIO_RAPIDO.md                  ✅ Quick start
+├── contrato-api.md                   ✅ Contrato SOAP
+└── AdocaoPetsSOAP.wsdl              ✅ WSDL auto-gerado
 ```
 
 ### Git History
 ```
-15+ commits mostrando evolução do projeto
+17+ commits mostrando evolução do projeto
 Mensagens descritivas com Co-author
 Todos os arquivos versionados no GitHub
 ```
@@ -178,7 +174,7 @@ INTEROPERABILIDADE CONFIRMADA ✅
 | Testes executados | 13 |
 | Testes passando | 13 |
 | Taxa de sucesso | 100% |
-| Commits com histórico | 15+ |
+| Commits com histórico | 17+ |
 | Documentação páginas | 7 |
 
 ---
@@ -313,95 +309,39 @@ Deve retornar: WSDL XML com as 3 operações
 
 **Aprendizado:** Demonstra compreensão profunda do protocolo SOAP
 
-### 3. Encoding de Caracteres no Windows
-**Problema:** Console Windows com cp1252, suporta mal UTF-8
-
-**Solução:** Usar ASCII puro nos testes
-
-**Resultado:** Output legível em ambos os ambientes
-
 ---
 
 ## 🎯 JUSTIFICATIVA TÉCNICA - POR QUE SOAP?
 
-### Adequação ao Cenário
+SOAP foi escolhido para este serviço de adoção de pets por:
 
-1. **Interoperabilidade Formal**
-   - SOAP é totalmente independente de linguagem
-   - Prova: servidor em Python consumido por Java
-
-2. **Contrato Explícito (WSDL)**
-   - Define operações, tipos e comportamentos
-   - Elimina ambiguidades
-   - Permite geração automática de stubs
-
-3. **Validação Forte de Tipos**
-   - Tipos complexos bem-definidos
-   - Validação estruturada
-   - Apropriado para garantir dados corretos
-
-4. **Tratamento Padrão de Erros**
-   - SOAP Fault oferece mecanismo padrão
-   - Faultcode + faultstring
-   - Sem dependência de códigos HTTP
-
-5. **Contexto Acadêmico**
-   - Protocolo consolidado e maduro
-   - Apropriado para fins educacionais
-   - Demonstra integração de sistemas formalmente
-
-### Comparação com Alternativas
-
-| Aspecto | SOAP | REST |
-|---------|------|------|
-| Contrato Formal | ✅ WSDL | ❌ Informal |
-| Tipagem Forte | ✅ XML Schema | ❌ Ad-hoc |
-| Validação | ✅ Estruturada | ❌ Manual |
-| Erro Padrão | ✅ SOAP Fault | ❌ HTTP codes |
-| Simplicidade | ❌ Mais complexo | ✅ Simples |
-| Payload | ❌ XML pesado | ✅ JSON leve |
-| Educacional | ✅ Demonstra integração | ❌ Óbvio demais |
-
-**Conclusão:** SOAP foi a escolha correta para demonstrar interoperabilidade real e conceitos avançados de integração de sistemas.
+1. **Interoperabilidade Formal**: SOAP é independente de linguagem. Prova: servidor Python consumido por Java
+2. **Contrato Explícito (WSDL)**: Define operações, tipos e comportamentos
+3. **Validação Forte de Tipos**: Tipos complexos bem-definidos
+4. **Tratamento Padrão de Erros**: SOAP Fault oferece mecanismo padrão
+5. **Contexto Acadêmico**: Protocolo consolidado apropriado para educação
 
 ---
 
 ## ✅ CONFORMIDADE COM REQUISITOS
 
 ### Requisito 1: Servidor SOAP
-✅ **ATENDIDO**
-- Implementado em Python (Flask + lxml)
-- Totalmente funcional
-- Rodando em http://127.0.0.1:8000/
+✅ Implementado em Python (Flask + lxml), 100% funcional
 
 ### Requisito 2: Contrato WSDL
-✅ **ATENDIDO**
-- Auto-gerado e funcional
-- Acessível em http://127.0.0.1:8000/
-- Contém as 3 operações
+✅ Auto-gerado, funcional e acessível
 
 ### Requisito 3: Mínimo 2 Operações
-✅ **EXCEDIDO** (3 operações)
-- cadastrarPet
-- cadastrarUsuario
-- adotarPet
+✅ Excedido com 3 operações
 
 ### Requisito 4: Cliente em Linguagem Diferente
-✅ **ATENDIDO** (2 clientes)
-- Python (Zeep)
-- Java (Manual)
+✅ Atendido com 2 clientes (Python + Java)
 
 ### Requisito 5: Testes Completos
-✅ **ATENDIDO** (13/13 testes passando)
-- 8 testes Python
-- 5 testes Java
-- Validação de erros
+✅ 13/13 testes passando
 
 ### Requisito 6: Documentação do Serviço
-✅ **ATENDIDO**
-- Contrato SOAP detalhado
-- WSDL auto-gerado
-- Exemplos de requisição/resposta
+✅ Contrato detalhado com exemplos
 
 ---
 
